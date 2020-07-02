@@ -7,6 +7,7 @@ from nltk import pos_tag
 from nltk.corpus import stopwords
 import string
 import os
+import re
 
 from labellertool.datareader import prepare_text
 
@@ -34,7 +35,7 @@ class sentencelabel:
         
         for text in texts:
             for word in text:
-
+                word = re.sub(r'[^\w\s]','',word)
                 new_texts.append(word_tokenize(word.translate(str.maketrans('', '', string.punctuation))))
         # flat_list_sent = [item for sublist in new_texts for item in sublist]
         sent_pos_tags = [pos_tag(sent) for sent in new_texts]
