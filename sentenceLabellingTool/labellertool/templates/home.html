@@ -1,0 +1,7 @@
+{% extends "layout.html" %}
+{% block content %}
+  {% if current_user.is_authenticated %}
+  {% else %}
+    <h1>Please login first</h1>
+  {% endif %}
+{% endblock content %}

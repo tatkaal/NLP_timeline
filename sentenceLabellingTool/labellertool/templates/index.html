@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Data labeling tool">
+    <meta name="author" content="Sujan and Sajjan">
+    <link rel="shortcut icon" href="{{ url_for('static', filename = 'assets/ico/favicon.ico') }}">
+
+    <title>Data labelling tool</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{{ url_for('static', filename = 'assets/css/bootstrap.css') }}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{{ url_for('static', filename = 'assets/css/main.css') }}" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <!-- <script src="../static/assets/js/excellentexport.js"></script> -->
+    <script src="../static/assets/js/table2CSV.js"></script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<!-- Static navbar -->
+<div class="navbar navbar-inverse navbar-static-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="index.html">Sentence labelling tool</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+
+                <li><a class="nav-item nav-link" href="{{ url_for('index') }}">Home</a></li>
+                <li><a class="nav-item nav-link" href="{{ url_for('account') }}">Account</a></li>
+                <li><a class="nav-item nav-link" href="{{ url_for('logout') }}">Logout</a></li>
+
+            </ul>
+        </div>
+        <!--/.nav-collapse -->
+    </div>
+</div>
+
+<!-- +++++ Projects Section +++++ -->
+
+<div class="container pt">
+    <div class="row mt">
+        <div class="col-lg-6 col-lg-offset-3 centered">
+            <h3>Enter the path of resume</h3>
+            <!-- <h5>Write here too</h5>
+            <hr>
+            <p>
+                Don't be lazy write something here too.....Dharmajit vai
+                or else the padding and margin might differ
+                yeti samma lekha ki yo talako copyright tyakkai bottom level
+                samma pugos haita....la best of luck
+                pass gara fyp
+            </p> -->
+        </div>
+    </div>
+    <div class="row mt">
+        <div class="col-lg-8 col-lg-offset-2">
+            <form role="form">
+                <div class="form-group">
+                    <input type="url" class="form-control" id="inputUrl"
+                           placeholder="C:\Users\zerad\Desktop\dolphinlab-master\seven\resume">
+                </div>
+                <input type="button" id="btnSubmit" value="SUBMIT" class="btn btn-success"/>
+            </form>
+            <hr>
+            <!-- <br/>
+            <a download="somedata.csv" href="#" onclick="return ExcellentExport.csv(this, 'datatable');">Export to CSV</a>
+            <br/>
+            <a download="somedata.xls" href="#" onclick="return ExcellentExport.excel(this, 'datatable', 'sentences and tag');">Export to Excel</a>
+            <br/> -->
+            <div class="container">
+                <!-- +++++ Summary output will be displayed here +++++ -->
+                <div class="row">
+                    <h5>Labels: </h5>
+                    <table class="table table-bordered table-dark" id="datatable">
+                        <thead>
+                        <tr>
+                            <th scope="col">S.No.</th>
+                            <th scope="col">Sentences</th>
+                            <th scope="col">POS Tag</th>
+                            <th scope="col">Category</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <!-- <tr>
+                            <th scope="row">1</th>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>Jacob</td>
+                            <td>Thornton</td>
+                            <td>@fat</td>
+                        </tr> -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div><!-- /row -->
+</div><!-- /container -->
+
+
+<!-- +++++ Footer Section +++++ -->
+
+<div id="footer">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-3">
+                <h4>On Internet</h4>
+                <p><a href="#">Contact On Facecbook</a><br/></p>
+            </div><!-- /col-lg-3 -->
+
+            <div class="col-lg-3">
+                <h4>Contact</h4>
+                <p><a href="#">Medium</a><br/></p>
+                <p><a href="#">LinkedIn</a><br/></p>
+            </div><!-- /col-lg-4 -->
+
+            <div class="col-lg-6">
+                <h4>About the project</h4>
+                <p>This is a web based tool for sentence level classification which makes use of <a href="https://www.nltk.org"
+                                                                                       target="_blank">NLTK</a> (for
+                    NLP)
+                    and <a href="https://flask.palletsprojects.com/en/1.1.x/" target="_blank">Flask</a> (for
+                    webservice).</p>
+            </div><!-- /col-lg-4 -->
+
+        </div>
+    </div>
+</div>
+
+<div id="copyrights">
+    <div class="container">
+        <p>
+            &copy; Copyrights <strong>2020</strong>. All Rights Reserved
+        </p>
+    </div>
+</div>
+<!-- / copyrights -->
+
+<!-- Bootstrap core JavaScript
+  ================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="{{ url_for('static', filename = 'assets/js/bootstrap.min.js') }}"></script>
+<script>var baseUrl = "{{ base_url|safe }}";</script>
+<script src="{{ url_for('static', filename = 'assets/js/main.js') }}"></script>
+
+</body>
+
+</html>
