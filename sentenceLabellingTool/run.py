@@ -4,4 +4,4 @@ from labellertool import app
 if __name__ == "__main__":
     # run the app
     # application.run(debug=True)
-    app.run(host = '0.0.0.0', port = 5005,debug=True)
+    app.run(host = '0.0.0.0', port = 8005,debug=True)
