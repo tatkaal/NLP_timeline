@@ -124,9 +124,3 @@ def save2csv():
     loader(int(index), 1, sentences, counter)
 
     return make_response(jsonify(''))
-
-if __name__ == '__main__':
-
-    app.run(
-        host="localhost"
-    )
