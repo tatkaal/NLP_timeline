@@ -1,4 +1,4 @@
-#!c:\users\zerad\desktop\dolphinlab-master\datalabeller\envvirtual\scripts\python.exe
+#!c:\users\zerad\desktop\git_repo\nlp_timeline\sentencelabellingtool\envvirtual\scripts\python.exe
 
 import docx2txt
 

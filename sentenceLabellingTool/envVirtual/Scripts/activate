@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\Users\zerad\Desktop\dolphinlab-master\datalabeller\envVirtual"
+VIRTUAL_ENV="C:\Users\zerad\Desktop\git_repo\NLP_timeline\sentenceLabellingTool\envVirtual"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
