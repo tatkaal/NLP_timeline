@@ -6,4 +6,4 @@ ADD . /app
 WORKDIR /app
 RUN pip install -r requirements.txt
 CMD python installChilkat.py
-CMD python run.py 0.0.0.0 -p 8005
+CMD python run.py
