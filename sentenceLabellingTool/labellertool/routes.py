@@ -84,9 +84,12 @@ def label():
     # print(request.files)
     if request.method == 'POST':
         # f = request.files.getlist("file")
-        f = request.files['file']
-        print('----------------------------------------',f.filename)
-        f.save(os.path.join(app.config['UPLOAD_FOLDER'],secure_filename(f.filename)))
+        print(request.files.getlist('file'))
+        print('**********************************')
+        f = request.files.getlist("file")
+        for each_file in f:
+            # print('----------------------------------------',secure_filename(each_file.filename))
+            each_file.save(os.path.join(app.config['UPLOAD_FOLDER'],secure_filename(each_file.filename)))
         print('file uploaded successfully')
         # for resumefile in f:
         #     filename = resumefile.filename
@@ -96,7 +99,8 @@ def label():
             obj = sentencelabel(app.config['UPLOAD_FOLDER'])
             sentences, pos = obj.labelit()
             print("try vitra chiryo")
-            os.remove(os.path.join(app.config['UPLOAD_FOLDER'],secure_filename(f.filename)))
+            for each_file in f:
+                os.remove(os.path.join(app.config['UPLOAD_FOLDER'],secure_filename(each_file.filename)))
 
         except Exception as ex:
             app.logger.error('label(): error while preparing labels: ' + str(ex) + '\n' + traceback.format_exc())
