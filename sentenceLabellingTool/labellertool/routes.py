@@ -3,9 +3,6 @@ from time import strftime
 
 from flask import request, jsonify, make_response, render_template, url_for, flash, redirect
 
-from labellertool.config.cfg_handler import CfgHandler
-from labellertool.config.cfg_utils import fetch_base_url
-
 from labellertool.generate_data import sentencelabel
 import csv
 from labellertool.appendTable import loader
@@ -14,13 +11,15 @@ from flask_login import login_user, current_user, logout_user, login_required
 from labellertool import app, db, bcrypt
 from labellertool.forms import RegistrationForm, LoginForm
 from labellertool.models import User, Post
+from werkzeug.utils import secure_filename
+import os
 
 # Initialize the Flask application
 # app = Flask(__name__)
 
 counter = 0
 
-@app.route('/')
+@app.route('/', methods=['GET'])
 @app.route('/home')
 def home():
     # base_url = fetch_base_url(CfgHandler())
@@ -73,42 +72,52 @@ def account():
 @app.route('/index')
 @login_required
 def index():
-    base_url = fetch_base_url(CfgHandler())
-    return render_template('index.html', base_url=base_url)
+    # base_url = fetch_base_url(CfgHandler())
+    return render_template('index.html')
 
-@app.route('/v1/label', methods=['GET'])
+@app.route('/', methods=['POST'])
 @login_required
 def label():
     global counter
-    app.logger.debug('label(): requested')
-    if 'url' not in request.args:
-        return make_response(jsonify({'error': str('Bad Request: argument `url` is not available')}), 400)
+    # print(request.method)
+    app.config['UPLOAD_FOLDER'] = 'labellertool/resume/'
+    # print(request.files)
+    if request.method == 'POST':
+        # f = request.files.getlist("file")
+        f = request.files['file']
+        print('----------------------------------------',f.filename)
+        f.save(os.path.join(app.config['UPLOAD_FOLDER'],secure_filename(f.filename)))
+        print('file uploaded successfully')
+        # for resumefile in f:
+        #     filename = resumefile.filename
+        #     print('##############################', filename)
 
-    url = request.args['url']
+        try:
+            obj = sentencelabel(app.config['UPLOAD_FOLDER'])
+            sentences, pos = obj.labelit()
+            print("try vitra chiryo")
+            os.remove(os.path.join(app.config['UPLOAD_FOLDER'],secure_filename(f.filename)))
 
-    if not url:  # if url is empty
-        return make_response(jsonify({'error': str('Bad Request: `url` is empty')}), 400)
+        except Exception as ex:
+            app.logger.error('label(): error while preparing labels: ' + str(ex) + '\n' + traceback.format_exc())
+            pass
+        
+        try:
+            with open('counter.txt', 'r') as fileread:
+                counter = int(fileread.read())
+        except:
+            pass
+        print(counter, type(counter))
 
-    try:
-        obj = sentencelabel(url)
-        sentences, pos = obj.labelit()
+        with open('counter.txt', 'w') as filewrite:
+            counter+=1
+            filewrite.write(str(counter))
 
-    except Exception as ex:
-        app.logger.error('label(): error while preparing labels: ' + str(ex) + '\n' + traceback.format_exc())
-        pass
-    
-    try:
-        with open('counter.txt', 'r') as fileread:
-            counter = int(fileread.read())
-    except:
-        pass
-    print(counter, type(counter))
+        return make_response(jsonify({'sentences': sentences,'pos':pos, 'file_index':str(counter)}))
 
-    with open('counter.txt', 'w') as filewrite:
-        counter+=1
-        filewrite.write(str(counter))
-
-    return make_response(jsonify({'sentences': sentences,'pos':pos, 'file_index':str(counter)}))
+        # return make_response(jsonify({'sentences':['euta cha', 'duita cha'],'pos':['a','b'],'file_index':str(counter)}))
+    else:
+        return 'not working......................'
 
 @app.route('/save_csv', methods=['POST'])
 @login_required

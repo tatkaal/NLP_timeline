@@ -17,30 +17,38 @@ var fileIndex = ''
 
 $(document).ready(function() {
 
-  $("#btnSubmit").click(function() {
-    
+//   $("#btnSubmit").click(function(event) {
+$("form#formFile").submit(function(e) {
 
+    $("tbody tr").remove();  
 
-    var resumePath = $("#inputUrl").val();
-
-    if (0 === resumePath.length) {
-        // Default link for testing
-        resumePath = "C:/Users/zerad/Desktop/dolphinlab-master/seven/resume";
-    }
-
+    var form_data = new FormData($('#formFile')[0]);
+    event.preventDefault();
     $.ajax({
-        url: baseUrl + "?url=" + resumePath,
+        method:"POST",
+        url:"/",
+        // url:"{{ url_for('uploader') }}",
+        data:form_data,
+        processData: false,
+        contentType: false,
         success:function(data){
+            try {
+                $('#formFile')[0].reset()
+            } catch (error) {
+                console.log(error)
+            }
+            // console.log(data)
+            console.log('Working')
+            // console.log(data['file_index'])
+            console.log('--------------------')
             fileIndex = data['file_index'];
-            console.log(data['sentences']);
+            // console.log(data['sentences']);
             showlines(data['sentences'], data['pos'])
+        },
+        error: function(xhr, ajaxOptions, thrownError){
+            //if fails  
+            console.log(xhr.responseText)   
         }
-    }).then(function(data) {
-    //    print('-----------------------------------')
-    //    print(data.sentence)
-    //    print(data.pos)
-    //    print('------------------------------------')
-    //    showlines(data.sentence);
     });
 
     function setAttributes(el, attrs) {

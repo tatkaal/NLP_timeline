@@ -10,9 +10,6 @@ colorama==0.4.3
 cryptography==2.9.2
 distro==1.5.0
 dnspython==1.16.0
-docker==4.2.2
-docker-compose==1.26.2
-dockerpty==0.4.1
 docopt==0.6.2
 docx2txt==0.8
 email-validator==1.1.1
