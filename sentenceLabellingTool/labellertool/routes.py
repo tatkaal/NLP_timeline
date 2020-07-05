@@ -13,6 +13,7 @@ from labellertool.forms import RegistrationForm, LoginForm
 from labellertool.models import User, Post
 from werkzeug.utils import secure_filename
 import os
+from labellertool.config import resumePath
 
 # Initialize the Flask application
 # app = Flask(__name__)
@@ -81,7 +82,7 @@ def label():
     global counter
     # print(request.method)
     # app.config['UPLOAD_FOLDER'] = 'labellertool/resume/'
-    resuemPath = 'labellertool/resume/'
+    # resumePath = 'labellertool/resume/'
     # print(request.files)
     if request.method == 'POST':
         # f = request.files.getlist("file")
@@ -90,17 +91,20 @@ def label():
         f = request.files.getlist("file")
         for each_file in f:
             # print('----------------------------------------',secure_filename(each_file.filename))
-            each_file.save(os.path.join(resuemPath,secure_filename(each_file.filename)))
+            print(os.path.join(resumePath,secure_filename(each_file.filename)))
+            each_file.save(os.path.join(resumePath,secure_filename(each_file.filename)))
         print('files uploaded successfully')
         # for resumefile in f:
         #     filename = resumefile.filename
         #     print('##############################', filename)
 
         try:
-            obj = sentencelabel(resuemPath)
+            obj = sentencelabel(resumePath)
             sentences, pos = obj.labelit()
             for each_file in f:
-                os.remove(os.path.join(resuemPath,secure_filename(each_file.filename)))
+                print('--------------------------')
+                print(os.path.join(resumePath,secure_filename(each_file.filename)))
+                os.remove(os.path.join(resumePath,secure_filename(each_file.filename)))
 
         except Exception as ex:
             app.logger.error('label(): error while preparing labels: ' + str(ex) + '\n' + traceback.format_exc())
