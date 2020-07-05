@@ -18,14 +18,9 @@ class sentencelabel:
 
     def return_resume_files_path(self):
         resume_files = [filenames for (dirpath, dirnames, filenames) in walk(self.resume_path)][0]
+        resume_files.remove('temp.txt')
         resume_files_path = [self.resume_path + '/' + filename for filename in resume_files]
         return resume_files_path
-
-    # resume_path = "C:/Users/zerad/Desktop/dolphinlab-master/seven/resume"
-    
-
-    # resume_files = [filenames for (dirpath, dirnames, filenames) in walk(cfg.resume_data_path)][0]
-    # resume_files_path = [cfg.resume_data_path + '/' + filename for filename in resume_files]
 
     def sent_tag(self,resume):
         new_texts = []

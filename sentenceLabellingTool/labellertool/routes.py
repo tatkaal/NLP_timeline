@@ -84,13 +84,13 @@ def label():
     # print(request.files)
     if request.method == 'POST':
         # f = request.files.getlist("file")
-        print(request.files.getlist('file'))
-        print('**********************************')
+        # print(request.files.getlist('file'))
+        # print('**********************************')
         f = request.files.getlist("file")
         for each_file in f:
             # print('----------------------------------------',secure_filename(each_file.filename))
             each_file.save(os.path.join(app.config['UPLOAD_FOLDER'],secure_filename(each_file.filename)))
-        print('file uploaded successfully')
+        print('files uploaded successfully')
         # for resumefile in f:
         #     filename = resumefile.filename
         #     print('##############################', filename)
@@ -98,7 +98,6 @@ def label():
         try:
             obj = sentencelabel(app.config['UPLOAD_FOLDER'])
             sentences, pos = obj.labelit()
-            print("try vitra chiryo")
             for each_file in f:
                 os.remove(os.path.join(app.config['UPLOAD_FOLDER'],secure_filename(each_file.filename)))
 
