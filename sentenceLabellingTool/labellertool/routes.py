@@ -80,7 +80,8 @@ def index():
 def label():
     global counter
     # print(request.method)
-    app.config['UPLOAD_FOLDER'] = 'labellertool/resume/'
+    # app.config['UPLOAD_FOLDER'] = 'labellertool/resume/'
+    resuemPath = 'labellertool/resume/'
     # print(request.files)
     if request.method == 'POST':
         # f = request.files.getlist("file")
@@ -89,17 +90,17 @@ def label():
         f = request.files.getlist("file")
         for each_file in f:
             # print('----------------------------------------',secure_filename(each_file.filename))
-            each_file.save(os.path.join(app.config['UPLOAD_FOLDER'],secure_filename(each_file.filename)))
+            each_file.save(os.path.join(resuemPath,secure_filename(each_file.filename)))
         print('files uploaded successfully')
         # for resumefile in f:
         #     filename = resumefile.filename
         #     print('##############################', filename)
 
         try:
-            obj = sentencelabel(app.config['UPLOAD_FOLDER'])
+            obj = sentencelabel(resuemPath)
             sentences, pos = obj.labelit()
             for each_file in f:
-                os.remove(os.path.join(app.config['UPLOAD_FOLDER'],secure_filename(each_file.filename)))
+                os.remove(os.path.join(resuemPath,secure_filename(each_file.filename)))
 
         except Exception as ex:
             app.logger.error('label(): error while preparing labels: ' + str(ex) + '\n' + traceback.format_exc())
