@@ -5,7 +5,7 @@ RUN apt-get update -y
 ADD . /app
 WORKDIR /app
 RUN pip install -r requirements.txt
-#RUN [ "python", "-c", "import nltk; nltk.download('all')" ]
+RUN [ "python", "-c", "import nltk; nltk.download('all')" ]
 RUN python installChilkat.py
-RUN python nltk_downloader.py
+# RUN python nltk_downloader.py
 CMD python run.py
