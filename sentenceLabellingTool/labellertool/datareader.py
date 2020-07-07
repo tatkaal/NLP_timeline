@@ -3,12 +3,13 @@ import re
 import docx2txt
 import fitz
 from pytesseract import image_to_string
-from subprocess import Popen, PIPE
+from subprocess import Popen,PIPE
 from PIL import Image
+import textract
 
 from nltk.tokenize import sent_tokenize
 
-def clean_text(text, dolower=False):
+def clean_text(text,dolower = False):
     '''
     Accepts the plain text and makes
     use of regex for cleaning the noise
@@ -17,16 +18,14 @@ def clean_text(text, dolower=False):
     '''
     if dolower == True:
         text = text.lower()
-    text = re.sub(
-        r'((http|ftp|https):\/\/)?[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?', '', text)
-    text = re.sub('\W',' ',text)
-    text = re.sub('\s+',' ',text)
+    text = re.sub(r'((http|ftp|https):\/\/)?[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?', '', text)
+    # # text = re.sub('\W',' ',text)
+    # text = re.sub('\s+',' ',text)
     text = text.encode('ascii', errors='ignore').decode("utf-8")
     return text
 
 
-
-def doc_to_text(filepath, dolower=False):
+def doc_to_text(filepath,dolower = False):
     '''
     Takes the doc file from the
     file path param and returns
@@ -35,14 +34,9 @@ def doc_to_text(filepath, dolower=False):
     :param filepath: path/directory of the doc file in the system
     :return: Returns the cleaned text from the file
     '''
-    text = ""
-    cmd = ['antiword', filepath]
-    p = Popen(cmd, stdout=PIPE)
-    stdout, stderr = p.communicate()
-    text += stdout.decode('utf-8', 'ignore')
-    # text = clean_text(text)
+    text = textract.process(filepath)
+    text = clean_text(str(text))
     return text
-
 
 def prepare_text_from_string(text):
     '''
@@ -53,7 +47,6 @@ def prepare_text_from_string(text):
     '''
     cleaned_text = clean_text(text)
     return cleaned_text
-
 
 def pdf_to_text(file_path, dolower):
     '''
@@ -72,14 +65,10 @@ def pdf_to_text(file_path, dolower):
         text += pagetext
     if dolower == True:
         text = text.lower()
-    # print(text)
     sentences = sent_tokenize(text)
-    # print(sentences)
-    # text = [clean_text(sentence, dolower) for sentence in sentences]
     return sentences
 
-
-def docx_to_text(file_path, dolower):
+def docx_to_text(file_path,dolower):
     '''
     Takes docx files and
     extracts plain text
@@ -89,11 +78,13 @@ def docx_to_text(file_path, dolower):
     '''
     text = ""
     text += docx2txt.process(file_path)
-    # text = clean_text(text)
-    return text
+    if dolower == True:
+        text = text.lower()
+    # print(text)
+    sentences = sent_tokenize(text)
+    return sentences
 
-
-def img_to_text(filepath, dolower):
+def img_to_text(filepath,dolower):
     '''
     Takes the image file
     from the file path param and returns
@@ -102,11 +93,14 @@ def img_to_text(filepath, dolower):
     :return: Returns the cleaned text from the image file
     '''
     text = image_to_string(Image.open(filepath))
-    text = clean_text(text)
-    return text
+    # text = clean_text(text)
+    if dolower == True:
+        text = text.lower()
+    # print(text)
+    sentences = sent_tokenize(text)
+    return sentences
 
-
-def txt_to_text(file_path, dolower):
+def txt_to_text(file_path,dolower):
     '''
     Extracts plain text from txt files
     :param file_path :type str
@@ -116,11 +110,14 @@ def txt_to_text(file_path, dolower):
     with open(file_path, mode='r', encoding='unicode_escape', errors='strict', buffering=1) as file:
         data = file.read()
     text += data
-    text = clean_text(text, dolower=True)
-    return text
+    # text = clean_text(text,dolower=True)
+    if dolower == True:
+        text = text.lower()
+    # print(text)
+    sentences = sent_tokenize(text)
+    return sentences
 
-
-def prepare_text(file, dolower=False):
+def prepare_text(file,dolower = False):
     '''
     Takes the resume or any other doc;
     checks the extension of doc and then
@@ -130,15 +127,16 @@ def prepare_text(file, dolower=False):
     :return: cleaned tokenized sentences :type list
     '''
     image_extensions = ['.jpeg', '.png', '.jpg', '.psd', '.ai']
-    reader_choice = {'.pdf': pdf_to_text,
-                     '.docx': docx_to_text,
-                     '.doc': doc_to_text,
-                     '.txt': txt_to_text,
-                     '.img': image_to_string}
+    reader_choice ={'.pdf': pdf_to_text,
+                    '.docx': docx_to_text,
+                    '.doc': doc_to_text,
+                    '.txt': txt_to_text,
+                    '.img':image_to_string}
 
     _, ext = os.path.splitext(file)
     if ext.lower() in image_extensions:
-        ext = '.img'
-    file_content = reader_choice[ext](file, dolower=dolower)
+            ext ='.img'
+    file_content = reader_choice[ext](file,dolower = False)
 
     return file_content
+

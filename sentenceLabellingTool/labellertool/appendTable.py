@@ -2,7 +2,15 @@ import sys
 import chilkat
 from pathlib import Path
 import os
+import logging
+
 path_to_download_folder = str(os.path.join(Path.home(), "Downloads"))
+# text_file = open("pathName.txt", "w")
+# text_file.write('Downloads path ::'+path_to_download_folder)
+
+# with open("Output.txt", "w") as text_file:
+#     text_file.write("Write blablabla into a file")
+
 def loader(rowIndex, columnIndex, value, fileIndex):
     csv = chilkat.CkCsv()
 
@@ -12,6 +20,9 @@ def loader(rowIndex, columnIndex, value, fileIndex):
 
     #  Load the CSV records from the file:
     # print(os.path.join(path_to_download_folder, f"test-{fileIndex}.csv"))
+    # text_file.write('loading file path ::'+os.path.join(path_to_download_folder, f"test-{fileIndex}.csv"))
+
+
     success = csv.LoadFile(os.path.join(path_to_download_folder, f"test-{fileIndex}.csv"))
     if (success != True):
         print(csv.lastErrorText())
@@ -31,5 +42,9 @@ def loader(rowIndex, columnIndex, value, fileIndex):
 
     #  Save the CSV to a file:
     success = csv.SaveFile(os.path.join(path_to_download_folder, f"test-{fileIndex}.csv"))
+
+    # text_file.write('saving file path ::'+os.path.join(path_to_download_folder, f"test-{fileIndex}.csv"))
+    # text_file.close()
+
     if (success != True):
         print(csv.lastErrorText())

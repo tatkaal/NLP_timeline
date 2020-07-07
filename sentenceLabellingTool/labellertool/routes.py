@@ -91,7 +91,7 @@ def label():
         f = request.files.getlist("file")
         for each_file in f:
             # print('----------------------------------------',secure_filename(each_file.filename))
-            print(os.path.join(resumePath,secure_filename(each_file.filename)))
+            # print(os.path.join(resumePath,secure_filename(each_file.filename)))
             each_file.save(os.path.join(resumePath,secure_filename(each_file.filename)))
         print('files uploaded successfully')
         # for resumefile in f:
@@ -102,8 +102,8 @@ def label():
             obj = sentencelabel(resumePath)
             sentences, pos = obj.labelit()
             for each_file in f:
-                print('--------------------------')
-                print(os.path.join(resumePath,secure_filename(each_file.filename)))
+                # print('--------------------------')
+                # print(os.path.join(resumePath,secure_filename(each_file.filename)))
                 os.remove(os.path.join(resumePath,secure_filename(each_file.filename)))
 
         except Exception as ex:
