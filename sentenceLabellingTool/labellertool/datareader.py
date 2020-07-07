@@ -35,7 +35,10 @@ def doc_to_text(filepath,dolower = False):
     :return: Returns the cleaned text from the file
     '''
     text = textract.process(filepath)
-    text = clean_text(str(text))
+    # text = clean_text(str(text))
+    if dolower == True:
+        text = text.lower()
+    sentences = sent_tokenize(text)
     return text
 
 def prepare_text_from_string(text):
