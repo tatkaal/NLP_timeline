@@ -3,8 +3,22 @@ import chilkat
 from pathlib import Path
 import os
 import logging
+import winreg
+# from labellertool.config import
 
-path_to_download_folder = str(os.path.join(Path.home(), "Downloads"))
+def get_download_path():
+    """Returns the default downloads path for linux or windows"""
+    if os.name == 'nt':
+        sub_key = r'SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders'
+        downloads_guid = '{374DE290-123F-4565-9164-39C4925E467B}'
+        with winreg.OpenKey(winreg.HKEY_CURRENT_USER, sub_key) as key:
+            location = winreg.QueryValueEx(key, downloads_guid)[0]
+        return location
+    else:
+        return os.path.join(os.path.expanduser('~'), 'downloads')
+
+# path_to_download_folder = str(os.path.join(Path.home(), "Downloads"))
+path_to_download_folder = get_download_path()
 # text_file = open("pathName.txt", "w")
 # text_file.write('Downloads path ::'+path_to_download_folder)
 
@@ -37,8 +51,8 @@ def loader(rowIndex, columnIndex, value, fileIndex):
 
     #  Write the updated CSV to a string and display:
 
-    csvDoc = csv.saveToString()
-    print(csvDoc)
+    # csvDoc = csv.saveToString()
+    # print(csvDoc)
 
     #  Save the CSV to a file:
     success = csv.SaveFile(os.path.join(path_to_download_folder, f"test-{fileIndex}.csv"))
