@@ -1,0 +1,27 @@
+S.No.,Sentences,POS Tag
+1,"Alexandria,Brown","NNP,NNP",Name
+2,"['Animation', 'Intern', 'Triserratops', 'Productions']","NNP,NNP,NNP,NNP"
+3,"['Brooklyn', 'NY', 'Email', 'me', 'on', 'Indeed', 'indeedcomrAlexandriaBrown7dc8e65f83fb9abf']","NNP,NNP,NNP,PRP,IN,RB,NN"
+4,"['Authorized', 'to', 'work', 'in', 'the', 'US', 'for', 'any', 'employer']","VBN,TO,VB,IN,DT,NNP,IN,DT,NN"
+5,"['WORK', 'EXPERIENCE']","NN,NN"
+6,"['Animation', 'Intern']","NN,NNP"
+7,"['Triserratops', 'Productions', 'Yonkers', 'NY', 'June', '2017', 'to', 'Present']","NNP,NNP,NNP,NNP,NNP,CD,TO,VB"
+8,"['Sarah', 'Lawrence', 'College']","NNP,NNP,NNP"
+9,"['Worked', 'closely', 'with', 'professional', 'filmmaker', 'on', 'January', 'May', '2016', 'Scott', 'Duce']","VBN,RB,IN,JJ,NN,IN,NNP,NNP,CD,NNP,NNP"
+10,"['Administrative', 'Support']","JJ,NN"
+11,"['Robin', 'Starbuck', 'Naperville', 'IL', 'September', '2016', 'to', 'December', '2016']","NNP,NNP,NNP,NNP,NNP,CD,TO,NNP,CD"
+12,"['Designed', 'a', 'management', 'system', 'for', 'shared', 'studio']","VBN,DT,NN,NN,IN,VBN,NN"
+13,['EDUCATION'],NN
+14,"['Bachelor', 'of', 'Liberal', 'Arts', 'in', 'Graphic', 'DesignIllustration']","NN,IN,JJ,NNS,IN,NNP,NNP"
+15,"['Sarah', 'Lawrence', 'College']","NNP,NNP,NNP"
+16,"['May', '2017']","NNP,CD"
+17,['SKILLS'],NN
+18,"['After', 'Effects', 'Less', 'than', '1', 'year', 'CSS', 'Less', 'than', '1', 'year', 'HTML', 'Less', 'than', '1', 'year', 'Illustration', 'Less', 'than', '1']","IN,NNS,NNP,IN,CD,NN,NNP,NNP,IN,CD,NN,NNP,NNP,IN,CD,NN,NNP,NNP,IN,CD"
+19,"['year', 'Illustrator', 'Less', 'than', '1', 'year']",NN
+20,"['ADDITIONAL', 'INFORMATION']","DT,NN"
+21,['Skills'],NNS
+22,"['COMPUTER', 'LANGUAGES']","NNP,NNP"
+23,"['Java', 'PHP', 'SQL', 'JavaScript', 'Processing', 'HTML', 'CSS']","NNP,NNP,NNP,NNP,NNP,NNP,NNP"
+24,['SOFTWARE'],NN
+25,"['After', 'Effects', 'Photoshop', 'InDesign', 'Illustrator', 'Final', 'Cut', 'ProFinal', 'Cut', 'Pro', 'X', 'Harmony']","IN,NNPS,NNP,NNP,NNP,NNP,NNP,NNP,NNP,NNP,NNP,NNP"
+26,"['Storyboard', 'Pro', 'Sketchbook', 'Pro', 'iStopMotion', 'Dragonframe', 'Microsoft', 'Office', 'Audacity']","NNP,NNP,NNP,NNP,NN,NNP,NNP,NNP,NNP"

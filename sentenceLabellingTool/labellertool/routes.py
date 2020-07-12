@@ -13,7 +13,8 @@ from labellertool.forms import RegistrationForm, LoginForm
 from labellertool.models import User, Post
 from werkzeug.utils import secure_filename
 import os
-from labellertool.config import resumePath
+from labellertool.config import resumePath, labelledDataPath
+import pandas as pd
 
 # Initialize the Flask application
 # app = Flask(__name__)
@@ -120,7 +121,13 @@ def label():
         with open('counter.txt', 'w') as filewrite:
             counter+=1
             filewrite.write(str(counter))
+        # print({'sentences': sentences,'pos':pos})
 
+        # cnt = [val for i in len(sentences)]
+        cnt = list(range(1,len(sentences)+1))
+        data = pd.DataFrame({'S.No.':cnt,'Sentences':sentences, 'POS Tag':pos})
+        data['Category'] = ''
+        data.to_csv(f'{labelledDataPath}/test-{counter}.csv', index=False)
         return make_response(jsonify({'sentences': sentences,'pos':pos, 'file_index':str(counter)}))
 
         # return make_response(jsonify({'sentences':['euta cha', 'duita cha'],'pos':['a','b'],'file_index':str(counter)}))
@@ -141,3 +148,13 @@ def save2csv():
     loader(int(index), 1, sentences, counter)
 
     return make_response(jsonify(''))
+
+@app.route('/counter', methods=['GET'])
+@login_required
+def return_counter():
+    return counter
+# @app.route('/downloadData/')
+# def downloadData():
+# #   print ('I got clicked!')
+
+#   return send_from_directory(directory=os.getcwd()+"/files", filename="filename.txt")

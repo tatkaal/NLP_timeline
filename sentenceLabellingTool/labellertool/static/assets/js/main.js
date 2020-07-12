@@ -13,6 +13,20 @@ function add_cat(e, category='', index='', sentences='', pos=''){
     });
 }
 
+
+
+$("#downloadFile").click(function(e) {
+        $('table').each(function () {
+            var $table = $(this);
+            $table.table2csv({
+                //C:/Users/zerad/Desktop/dolphinlab-master/Dharmajit/summarize-webpage/
+                file_name:  'test-'+fileIndex+'.csv',
+                header_body_space:  0
+            });
+        });
+    }
+);
+
 var fileIndex = ''
 
 $(document).ready(function() {
@@ -146,14 +160,14 @@ $("form#formFile").submit(function(e) {
 
             // $('#label').append(uList);
         }
-        $('table').each(function () {
-            var $table = $(this);
-            $table.table2csv({
-                //C:/Users/zerad/Desktop/dolphinlab-master/Dharmajit/summarize-webpage/
-                file_name:  'test-'+fileIndex+'.csv',
-                header_body_space:  0
-            });
-        });
+        // $('table').each(function () {
+        //     var $table = $(this);
+        //     $table.table2csv({
+        //         //C:/Users/zerad/Desktop/dolphinlab-master/Dharmajit/summarize-webpage/
+        //         file_name:  'test-'+fileIndex+'.csv',
+        //         header_body_space:  0
+        //     });
+        // });
         // } else {
         //     var label = document.createElement('p');
         //     label.innerHTML = "<b>Labels</b>: " + sentences;

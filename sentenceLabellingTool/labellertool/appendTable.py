@@ -4,7 +4,7 @@ from pathlib import Path
 import os
 import logging
 import winreg
-# from labellertool.config import
+from labellertool.config import labelledDataPath
 
 def get_download_path():
     """Returns the default downloads path for linux or windows"""
@@ -18,7 +18,8 @@ def get_download_path():
         return os.path.join(os.path.expanduser('~'), 'downloads')
 
 # path_to_download_folder = str(os.path.join(Path.home(), "Downloads"))
-path_to_download_folder = get_download_path()
+# path_to_download_folder = get_download_path()
+path_to_download_folder = labelledDataPath
 # text_file = open("pathName.txt", "w")
 # text_file.write('Downloads path ::'+path_to_download_folder)
 
@@ -36,7 +37,7 @@ def loader(rowIndex, columnIndex, value, fileIndex):
     # print(os.path.join(path_to_download_folder, f"test-{fileIndex}.csv"))
     # text_file.write('loading file path ::'+os.path.join(path_to_download_folder, f"test-{fileIndex}.csv"))
 
-
+    # print(os.path.join(path_to_download_folder, f"test-{fileIndex}.csv"))
     success = csv.LoadFile(os.path.join(path_to_download_folder, f"test-{fileIndex}.csv"))
     if (success != True):
         print(csv.lastErrorText())
