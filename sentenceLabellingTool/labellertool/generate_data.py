@@ -24,38 +24,40 @@ class sentencelabel:
 
     def sent_tag(self,resume):
         new_texts = []
-        pos_tag_text = []
+        # pos_tag_text = []
         texts = prepare_text(resume,True)
         texts = [text.splitlines() for text in texts]
         
         for text in texts:
             for word in text:
-                word = re.sub(r'[^\w\s]','',word)
-                new_texts.append(word_tokenize(word.translate(str.maketrans('', '', string.punctuation))))
+                if word.strip() != "":
+                    # word = re.sub(r'[^\w\s]','',word)
+                    # new_texts.append(word_tokenize(word))
+                    new_texts.append(word)
         # flat_list_sent = [item for sublist in new_texts for item in sublist]
-        sent_pos_tags = [pos_tag(sent) for sent in new_texts]
+        # sent_pos_tags = [pos_tag(sent) for sent in new_texts]
         
-        tag_text = ''
-        for text in sent_pos_tags:
-            for pos in text:
-                if(text.index(pos)==0):
-                    tag_text = pos[1]
-                else:
-                    tag_text = tag_text + ',' + pos[1]
-            pos_tag_text.append(tag_text)
+        # tag_text = ''
+        # for text in sent_pos_tags:
+        #     for pos in text:
+        #         if(text.index(pos)==0):
+        #             tag_text = pos[1]
+        #         else:
+        #             tag_text = tag_text + ',' + pos[1]
+            # pos_tag_text.append(tag_text)
         
-        return new_texts, pos_tag_text
+        return new_texts
 
     def labelit(self):
         chunk_sentence = []
-        chunk_pos = []
+        # chunk_pos = []
 
         resume_files_path = self.return_resume_files_path()
 
         for resume in resume_files_path:
-            val_new, val_pos = self.sent_tag(resume)
+            val_new = self.sent_tag(resume)
             chunk_sentence = chunk_sentence + val_new
-            chunk_pos = chunk_pos + val_pos
+            # chunk_pos = chunk_pos + val_pos
             # break
 
         # print(len(chunk_sentence))
@@ -64,7 +66,7 @@ class sentencelabel:
         # finaldata = pd.DataFrame({'sentences':chunk_sentence, 'pos_tag':chunk_pos})
         # finaldata['category'] = ''
 
-        return chunk_sentence, chunk_pos
+        return chunk_sentence
         # print(finaldata)
         # exit()
 

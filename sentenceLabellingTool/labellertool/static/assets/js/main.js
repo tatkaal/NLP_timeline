@@ -1,6 +1,6 @@
-function add_cat(e, category='', index='', sentences='', pos=''){
+function add_cat(e, category='', index='', sentences=''){
     e.preventDefault();
-    console.log(category, index, sentences, pos);
+    console.log(category, index, sentences);
     $.ajax({
         type:'POST',
         url: 'save_csv',
@@ -8,7 +8,6 @@ function add_cat(e, category='', index='', sentences='', pos=''){
             'category':category,
             'index': index,
             'sentences': sentences,
-            'pos':pos
         }
     });
 }
@@ -57,7 +56,7 @@ $("form#formFile").submit(function(e) {
             console.log('--------------------')
             fileIndex = data['file_index'];
             // console.log(data['sentences']);
-            showlines(data['sentences'], data['pos'])
+            showlines(data['sentences'])
         },
         error: function(xhr, ajaxOptions, thrownError){
             //if fails  
@@ -73,7 +72,7 @@ $("form#formFile").submit(function(e) {
 
     
 
-    function showlines(sentences, pos) {
+    function showlines(sentences) {
 
         // $('#label').empty();
         if (sentences) {
@@ -87,7 +86,7 @@ $("form#formFile").submit(function(e) {
             // tbl.setAttribute('border', '1');
             // var tbdy = document.createElement('tbody');
             var arr = []
-            var category = ['Select','Name', 'Experience', 'Skills']
+            var category = ['Select','Name', 'Experience', 'Technical-Skill','Soft-Skill','Title', 'Email','Address','Date','Project_title','Responsibility','Description','Designation_Title','Education_title','Phone_number','References','Certification','Link','Language','Company','Licenses','Other']
             var arr_sec = []
             for (var i = 0; i < (sentences.length); i++) {
                 var tr = tbl.insertRow(i);
@@ -101,9 +100,9 @@ $("form#formFile").submit(function(e) {
                 {
                     tryit=sentences[i].length
                 }
-                arr = [i+1, sentences[i].slice(0,tryit), pos[i].slice(0,pos[i].length)]
+                arr = [i+1, sentences[i].slice(0,tryit)]
                 // arr_sec = [0, pos[i].slice(0,pos[i].length)]
-                for (var j=0; j<3;j++)
+                for (var j=0; j<2;j++)
                 {
                     var th = tr.insertCell(j);
                     // var th2 = tr.insertCell(j+1);
@@ -131,7 +130,7 @@ $("form#formFile").submit(function(e) {
                         th.innerHTML = arr[j]
                     }
                 }
-                var th = tr.insertCell(3);
+                var th = tr.insertCell(2);
                 var dropdown = '<div class="dropdown">'+
                 // '<form action="" name="FILTER">'+
                     '<select name="filter_for class="dropdown-menu" id="dropdown-'+i+'"" >'+
@@ -142,8 +141,8 @@ $("form#formFile").submit(function(e) {
                 $(th).append(dropdown);
 
 
-                for (var j=0;j<4;j++){
-                    $('#dropdown-'+i+'').append('<option class="dropdown-item" onclick="add_cat(event, category=\''+category[j]+'\', '+i+', \''+sentences[i]+'\', \'' + pos[i]+'\')">'+category[j]+'</option><br>');
+                for (var j=0;j<21;j++){
+                    $('#dropdown-'+i+'').append('<option class="dropdown-item" onclick="add_cat(event, category=\''+category[j]+'\', '+i+', \''+sentences[i]+'\')">'+category[j]+'</option><br>');
                 }
 
                 tbl.appendChild(tr);

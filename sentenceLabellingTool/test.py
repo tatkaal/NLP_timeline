@@ -1,16 +1,22 @@
-import os
-import winreg
+import re
 
-def get_download_path():
-    """Returns the default downloads path for linux or windows"""
-    if os.name == 'nt':
-        sub_key = r'SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders'
-        downloads_guid = '{374DE290-123F-4565-9164-39C4925E467B}'
-        with winreg.OpenKey(winreg.HKEY_CURRENT_USER, sub_key) as key:
-            location = winreg.QueryValueEx(key, downloads_guid)[0]
-        return location
-    else:
-        return os.path.join(os.path.expanduser('~'), 'downloads')
+texts = ['Here are some \n\n\n\n\n\n\n\n\n\nwords about\n\n\n\n\n\n\n\n us right\n\n\n\n.']
 
-path = get_download_path()
-print(path)
+texts = [text.splitlines() for text in texts]
+print(texts)
+# [['Here are some ', '', '', '', '', '', '', '', '', '', 'words about', '', '', '', '', '', '', '', ' us right', '', '', '', '.']]
+
+x = []
+for txt in texts:
+    # x.append([line for line in txt if line.strip() != ""])
+    for line in txt:
+        if line.strip() != "":
+            x.append([line])
+
+print(x)
+
+# [['Here', 'are', 'some'], [], [], [], [], [], [], [], [], [], ['words', 'about'], [], [], [], [], [], [], [], ['us', 'right'], [], [], [], []]
+
+# for x in txt:
+#     x=re.sub("\n","ad",x)
+#     print(x)

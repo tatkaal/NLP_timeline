@@ -1,0 +1,24 @@
+label(): error while preparing labels: 'list' object has no attribute 'strip'
+Traceback (most recent call last):
+  File "C:\Users\zerad\Desktop\git_repo\NLP_timeline\sentenceLabellingTool\labellertool\routes.py", line 104, in label
+    sentences = obj.labelit()
+  File "C:\Users\zerad\Desktop\git_repo\NLP_timeline\sentenceLabellingTool\labellertool\generate_data.py", line 58, in labelit
+    val_new = self.sent_tag(resume)
+  File "C:\Users\zerad\Desktop\git_repo\NLP_timeline\sentenceLabellingTool\labellertool\generate_data.py", line 30, in sent_tag
+    texts = [line for line in texts if line.strip() != ""]
+  File "C:\Users\zerad\Desktop\git_repo\NLP_timeline\sentenceLabellingTool\labellertool\generate_data.py", line 30, in <listcomp>
+    texts = [line for line in texts if line.strip() != ""]
+AttributeError: 'list' object has no attribute 'strip'
+
+label(): error while preparing labels: 'list' object has no attribute 'strip'
+Traceback (most recent call last):
+  File "C:\Users\zerad\Desktop\git_repo\NLP_timeline\sentenceLabellingTool\labellertool\routes.py", line 104, in label
+    sentences = obj.labelit()
+  File "C:\Users\zerad\Desktop\git_repo\NLP_timeline\sentenceLabellingTool\labellertool\generate_data.py", line 59, in labelit
+    val_new = self.sent_tag(resume)
+  File "C:\Users\zerad\Desktop\git_repo\NLP_timeline\sentenceLabellingTool\labellertool\generate_data.py", line 31, in sent_tag
+    texts = [line for line in texts if line.strip() != ""]
+  File "C:\Users\zerad\Desktop\git_repo\NLP_timeline\sentenceLabellingTool\labellertool\generate_data.py", line 31, in <listcomp>
+    texts = [line for line in texts if line.strip() != ""]
+AttributeError: 'list' object has no attribute 'strip'
+

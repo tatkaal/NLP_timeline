@@ -101,7 +101,7 @@ def label():
 
         try:
             obj = sentencelabel(resumePath)
-            sentences, pos = obj.labelit()
+            sentences = obj.labelit()
             for each_file in f:
                 # print('--------------------------')
                 # print(os.path.join(resumePath,secure_filename(each_file.filename)))
@@ -125,10 +125,10 @@ def label():
 
         # cnt = [val for i in len(sentences)]
         cnt = list(range(1,len(sentences)+1))
-        data = pd.DataFrame({'S.No.':cnt,'Sentences':sentences, 'POS Tag':pos})
+        data = pd.DataFrame({'S.No.':cnt,'Sentences':sentences})
         data['Category'] = ''
         data.to_csv(f'{labelledDataPath}/test-{counter}.csv', index=False)
-        return make_response(jsonify({'sentences': sentences,'pos':pos, 'file_index':str(counter)}))
+        return make_response(jsonify({'sentences': sentences, 'file_index':str(counter)}))
 
         # return make_response(jsonify({'sentences':['euta cha', 'duita cha'],'pos':['a','b'],'file_index':str(counter)}))
     else:
@@ -140,7 +140,7 @@ def save2csv():
     global counter
 
     category = request.form.get('category')
-    pos = request.form.get('pos')
+    # pos = request.form.get('pos')
     sentences = request.form.get('sentences')
     index = request.form.get('index')
 

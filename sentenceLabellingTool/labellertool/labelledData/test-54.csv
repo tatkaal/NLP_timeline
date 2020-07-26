@@ -1,0 +1,5 @@
+S.No.,Sentences,POS Tag,Category
+1,Here are some ,"NNP,NN,NN,NN,VBZ,DT,NN,NN,NNP,NN,NN,NN,NN,NN",
+2,words about,"NN,MD,VB,JJ,NN,VBD,DT,NN,NN,JJ,NN",
+3, us right,"JJ,JJ,NN,NNP,NN,NN,VBP,NN,NN",
+4,.,.,

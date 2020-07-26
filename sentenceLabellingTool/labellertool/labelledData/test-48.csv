@@ -1,0 +1,5 @@
+S.No.,Sentences,POS Tag,Category
+1,"['Here', 'are', 'some']","RB,VBP,DT",
+2,"['words', 'about']","NNS,IN",
+3,"['us', 'right']","PRP,RB",
+4,[],"PRP,RB",
