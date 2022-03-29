@@ -39,7 +39,7 @@ nltk==3.5
 numpy==1.19.0
 olefile==0.46
 pandas==1.0.5
-paramiko==2.7.1
+paramiko==2.10.1
 pdfminer.six==20181108
 Pillow==7.2.0
 pycparser==2.20
