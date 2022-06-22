@@ -36,7 +36,7 @@ lxml==4.5.1
 MarkupSafe==1.1.1
 mccabe==0.6.1
 nltk==3.5
-numpy==1.19.0
+numpy==1.22.0
 olefile==0.46
 pandas==1.0.5
 paramiko==2.7.1
